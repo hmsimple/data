@@ -43,8 +43,11 @@ function clearUnmaterializedHasMany(record, relationship) {
 
   if (!references) { return; }
 
-  var inverseName = record.constructor.inverseFor(relationship.key).name;
+  var inverse = record.constructor.inverseFor(relationship.key);
 
+  if (!inverse) { return; }
+
+  var inverseName = inverse.name;
 
   forEach.call(references, function(reference) {
     var childRecord;
